@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Tri ân Ngày Nhà Giáo Việt Nam 20/11 – P.E.Crew</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background: linear-gradient(120deg, #fff4f8, #eef3ff, #fff7e6);
+        font-family: "Times New Roman", serif;
+    }
+
+    /* Tia sáng di chuyển */
+    .shine {
+        position: fixed;
+        top: 0; left: -100%;
+        width: 70%; height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(255,255,255,0.45), transparent);
+        animation: shineMove 7s infinite linear;
+        pointer-events: none;
+    }
+
+    @keyframes shineMove {
+        0% { left: -120%; }
+        100% { left: 150%; }
+    }
+
+    /* PHONG BAO */
+    .envelope {
+        width: 650px;
+        height: 360px;
+        background: white;
+        margin: 60px auto 0;
+        position: relative;
+        border-radius: 12px;
+        box-shadow: 0 0 25px rgba(0,0,0,0.18);
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .envelope:hover { transform: scale(1.02); }
+
+    .flap {
+        position: absolute;
+        top: -70px;
+        width: 100%;
+        height: 70px;
+        background: #ffb3c6;
+        clip-path: polygon(0 0, 100% 0, 50% 100%);
+        transition: 0.6s;
+    }
+
+    /* Dòng thông báo "Xin mời ấn" */
+    .prompt {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        top: 150px;
+        font-size: 18px;
+        color: #a32c3c;
+        font-weight: bold;
+        pointer-events: none;
+    }
+
+    /* LÁ THƯ */
+    .letter {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        background: #fffef6;
+        border-radius: 8px;
+        padding: 26px;
+        font-size: 17px;
+        line-height: 1.35;
+        opacity: 0;
+        transform: translateY(180%);
+        transition: 0.8s;
+    }
+
+    .open .flap { transform: rotateX(180deg); transform-origin: top; }
+    .open .letter { opacity: 1; transform: translateY(0); }
+    .open .prompt { display: none; } /* ẩn dòng thông báo khi mở thư */
+
+    /* Hoa lá rơi */
+    .fall {
+        position: fixed;
+        top: -10px;
+        font-size: 22px;
+        animation: fall 7s linear infinite;
+    }
+
+    @keyframes fall {
+        0% { transform: translateY(-40px) rotate(0); opacity:1; }
+        100% { transform: translateY(110vh) rotate(360deg); opacity:0; }
+    }
+
+    /* Chữ ký P.E.Crew */
+    .signature {
+        text-align: right;
+        margin-top: 32px;
+        font-size: 19px;
+        font-style: italic;
+        color: #b93d3d;
+    }
+    .signature span {
+        font-size: 22px;
+        font-weight: bold;
+        color: #a52222;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="shine"></div>
+
+<div class="envelope" id="mail">
+    <div class="flap"></div>
+    
+    <!-- Dòng thông báo -->
+    <div class="prompt">Xin mời ấn vào phong bì để mở thư</div>
+
+    <div class="letter">
+        <h2 style="text-align:center;color:#d26b6b;margin-top:0;font-size:22px;">
+            THƯ TRI ÂN NGÀY NHÀ GIÁO VIỆT NAM 20/11
+        </h2>
+
+        Kính gửi Quý Thầy Cô Trường Cao đẳng FPT Polytechnic Hà Nội,<br><br>
+
+        Nhân ngày Nhà giáo Việt Nam, chúng em xin gửi lời tri ân sâu sắc nhất
+        tới các thầy cô – những người đã truyền thụ tri thức, thắp lên trong chúng em
+        niềm tin và động lực để bước tiếp trên con đường học tập.<br><br>
+
+        Đặc biệt, kính gửi lời cảm ơn chân thành đến các thầy cô Bộ môn Kinh tế – 
+        Ngành Truyền thông & Tổ chức Sự kiện.  
+        Sự tận tâm và tâm huyết của thầy cô đã đồng hành và giúp chúng em trưởng thành từng ngày.<br><br>
+
+        Kính chúc thầy cô sức khỏe, hạnh phúc và thành công trong sự nghiệp trồng người cao quý!<br><br>
+
+        <div class="signature">
+            Trân trọng,<br>
+            <span>P.E.Crew</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Mở thư
+    document.getElementById("mail").onclick = function () {
+        this.classList.toggle("open");
+    };
+
+    // Hoa rơi
+    const emo = ["🌸","💐","🌺","🍃","🍂"];
+    function makeFall() {
+        let leaf = document.createElement("div");
+        leaf.className = "fall";
+        leaf.innerHTML = emo[Math.floor(Math.random() * emo.length)];
+        leaf.style.left = Math.random()*100 + "vw";
+        leaf.style.animationDuration = (5 + Math.random()*4) + "s";
+        leaf.style.fontSize = (18 + Math.random()*12) + "px";
+        document.body.appendChild(leaf);
+        setTimeout(() => leaf.remove(), 9000);
+    }
+    setInterval(makeFall, 600);
+</script>
+
+</body>
+</html>
